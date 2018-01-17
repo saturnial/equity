@@ -1,9 +1,9 @@
-var Collect = artifacts.require("Collect");
+var Project = artifacts.require("Project");
 
-contract('Collect', function(accounts) {
+contract('Project', function(accounts) {
 
   it("should set initial balances to 0", function() {
-   return Collect.deployed().then(function(instance) {
+   return Project.deployed().then(function(instance) {
      return instance.balanceOf(accounts[0]);
    }).then(function(balance) {
      assert.equal(balance, 0, "No money should have been collected.");
@@ -12,13 +12,13 @@ contract('Collect', function(accounts) {
 
  it("should store a balance of 100", function() {
    var amount = 100;
-   var collect;
+   var project;
 
-  return Collect.deployed().then(function(instance) {
-    collect = instance;
-    return collect.contribute(accounts[0], amount);
+  return Project.deployed().then(function(instance) {
+    project = instance;
+    return project.contribute(accounts[0], amount);
   }).then(function(success) {
-    return collect.balanceOf(accounts[0]);
+    return project.balanceOf(accounts[0]);
   }).then(function(balance) {
     assert.equal(balance, amount, "A balance of 100 should be stored.");
   });

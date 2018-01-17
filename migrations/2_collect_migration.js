@@ -1,5 +1,5 @@
-var Collect = artifacts.require("./Collect.sol");
+var Project = artifacts.require("./Project.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(Collect);
+  deployer.deploy(Project);
 };
