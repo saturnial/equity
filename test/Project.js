@@ -2,15 +2,15 @@ var Project = artifacts.require("Project");
 
 contract('Project', function(accounts) {
 
-  it("should set initial balances to 0", function() {
+  it("starts with 0 funds", function() {
    return Project.deployed().then(function(instance) {
-     return instance.balanceOf(accounts[0]);
-   }).then(function(balance) {
-     assert.equal(balance, 0, "No money should have been collected.");
+     return instance.totalAmountRaised();
+   }).then(function(total) {
+     assert.equal(total, 0, "No funds should be tied to a new project.");
    });
  });
 
- it("should store a balance of 100", function() {
+ it("should be able to accept a contribution of 100", function() {
    var amount = 100;
    var project;
 
@@ -20,7 +20,10 @@ contract('Project', function(accounts) {
   }).then(function(success) {
     return project.balanceOf(accounts[0]);
   }).then(function(balance) {
-    assert.equal(balance, amount, "A balance of 100 should be stored.");
+    assert.equal(balance, amount, "A balance of 100 should be mapped to the contributor.");
+    return project.totalAmountRaised();
+  }).then(function(total) {
+    assert.equal(total, amount, "Total amount raised should be 100.");
   });
 });
 
