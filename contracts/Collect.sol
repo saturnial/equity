@@ -1,6 +1,6 @@
 pragma solidity ^0.4.2;
 
-contract Collect {
+contract Project {
 
    mapping (address => uint256) public balances;
 
