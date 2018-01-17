@@ -2,7 +2,7 @@ pragma solidity ^0.4.2;
 
 contract Project {
 
-   mapping (address => uint256) public contributions;
+   mapping (address => uint) public contributions;
    uint public totalAmountRaised;
 
    function contribute(address _contributor, uint _amount) public returns (bool) {
