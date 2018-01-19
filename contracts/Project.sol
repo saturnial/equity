@@ -13,7 +13,7 @@ contract Project {
      target = _target;
    }
 
-   function contribute(address _contributor, uint _amount) public returns (bool) {
+   function contribute(address _contributor, uint _amount) public returns (bool success) {
      contributions[_contributor] += _amount;
      totalAmountRaised += _amount;
      return true;
