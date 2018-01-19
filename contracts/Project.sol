@@ -23,4 +23,8 @@ contract Project {
         return contributions[_contributor];
     }
 
+    function isFullyFunded() public view returns (bool) {
+      return totalAmountRaised >= target;
+    }
+
 }

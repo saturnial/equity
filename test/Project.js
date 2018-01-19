@@ -6,7 +6,7 @@ contract('Project', function(accounts) {
     const contract = await Project.deployed();
     const total = await contract.totalAmountRaised();
     assert.equal(total, 0, "No funds should be tied to a new project.");
- });
+  });
 
  it("should be able to accept a contribution of 100", async function() {
    const amount = 100;
@@ -16,6 +16,19 @@ contract('Project', function(accounts) {
    assert.equal(balance, amount, "A balance of 100 should be mapped to the contributor.");
    const total = await contract.totalAmountRaised();
    assert.equal(total, amount, "Total amount raised should be 100.");
+ });
+
+ it("should be able to determine if its target has been reached", async function() {
+   var funded = false;
+   const contract = await Project.new(accounts[0], 200);
+   _ = await contract.contribute(accounts[1], 100);
+   funded = await contract.isFullyFunded();
+   // Project is not yet funded.
+   assert.isFalse(funded);
+   _ = await contract.contribute(accounts[2], 200);
+   // Project should now be fully funded.
+   funded = await contract.isFullyFunded();
+   assert.isTrue(funded);
  });
 
 });
