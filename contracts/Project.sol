@@ -2,8 +2,8 @@ pragma solidity ^0.4.2;
 
 contract Project {
 
-  address owner;
-  uint target;
+  address public owner;
+  uint public target;
 
    mapping (address => uint) public contributions;
    uint public totalAmountRaised;
