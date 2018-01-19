@@ -2,29 +2,20 @@ var Project = artifacts.require("Project");
 
 contract('Project', function(accounts) {
 
-  it("starts with 0 funds", function() {
-   return Project.deployed().then(function(instance) {
-     return instance.totalAmountRaised();
-   }).then(function(total) {
-     assert.equal(total, 0, "No funds should be tied to a new project.");
-   });
+  it("starts with 0 funds raised", async function() {
+    const contract = await Project.deployed();
+    const total = await contract.totalAmountRaised();
+    assert.equal(total, 0, "No funds should be tied to a new project.");
  });
 
- it("should be able to accept a contribution of 100", function() {
-   var amount = 100;
-   var project;
-
-  return Project.deployed().then(function(instance) {
-    project = instance;
-    return project.contribute(accounts[0], amount);
-  }).then(function(success) {
-    return project.balanceOf(accounts[0]);
-  }).then(function(balance) {
-    assert.equal(balance, amount, "A balance of 100 should be mapped to the contributor.");
-    return project.totalAmountRaised();
-  }).then(function(total) {
-    assert.equal(total, amount, "Total amount raised should be 100.");
-  });
-});
+ it("should be able to accept a contribution of 100", async function() {
+   const amount = 100;
+   const contract = await Project.deployed();
+   const success = await contract.contribute(accounts[0], amount);
+   const balance = await contract.balanceOf(accounts[0]);
+   assert.equal(balance, amount, "A balance of 100 should be mapped to the contributor.");
+   const total = await contract.totalAmountRaised();
+   assert.equal(total, amount, "Total amount raised should be 100.");
+ });
 
 });
