@@ -44,4 +44,13 @@ contract("Project", accounts => {
     funded = await contract.isFullyFunded();
     assert.isTrue(funded);
   });
+
+  it("should return the total number of contributions", async () => {
+    const contract = await Project.new(accounts[0], 200, 12);
+    await contract.contribute(accounts[1], 100);
+    await contract.contribute(accounts[2], 200);
+    await contract.contribute(accounts[3], 300);
+    const numberOfContributions = await contract.numberOfContributions();
+    assert.equal(numberOfContributions, 3, "There are 3 contributions.");
+  });
 });

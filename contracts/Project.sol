@@ -6,6 +6,7 @@ contract Project {
   address public owner;
   uint public target;
   uint public totalAmountRaised;
+  address[] public contributors;
   mapping (address => uint) public contributions;
 
   /* events */
@@ -19,6 +20,7 @@ contract Project {
   function contribute(address _contributor, uint _amount) public returns (bool success) {
     contributions[_contributor] += _amount;
     totalAmountRaised += _amount;
+    contributors.push(_contributor);
     ContributionMade(_contributor, _amount);
     return true;
   }
@@ -29,6 +31,10 @@ contract Project {
 
   function isFullyFunded() public view returns (bool funded) {
     return totalAmountRaised >= target;
+  }
+
+  function numberOfContributions() public view returns (uint number) {
+    return contributors.length;
   }
 
 }
