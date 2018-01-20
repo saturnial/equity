@@ -5,8 +5,8 @@ contract Project {
   /* public properties */
   address public owner;
   uint public target;
-  mapping (address => uint) public contributions;
   uint public totalAmountRaised;
+  mapping (address => uint) public contributions;
 
   /* events */
   event ContributionMade(address contributor, uint amount);
@@ -27,7 +27,7 @@ contract Project {
     return contributions[_contributor];
   }
 
-  function isFullyFunded() public view returns (bool) {
+  function isFullyFunded() public view returns (bool funded) {
     return totalAmountRaised >= target;
   }
 
