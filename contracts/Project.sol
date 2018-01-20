@@ -5,6 +5,7 @@ contract Project {
   /* public properties */
   address public owner;
   uint public target;
+  uint public deadline;
   uint public totalAmountRaised;
   address[] public contributors;
   mapping (address => uint) public contributions;
@@ -13,9 +14,10 @@ contract Project {
   event ContributionMade(address contributor, uint amount);
   event GoalReached(uint amount, address beneficiary);
 
-  function Project(address _owner, uint _target) public {
+  function Project(address _owner, uint _target, uint _durationInHours) public {
     owner = _owner;
     target = _target;
+    deadline = now + _durationInHours * 1 hours;
   }
 
   /* This modifier ensures that the function it modifies is only run if the
