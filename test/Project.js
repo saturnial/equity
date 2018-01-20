@@ -4,9 +4,11 @@ contract('Project', function(accounts) {
 
   it("is initialized with an owner and target", async function() {
     const target = 200;
-    const contract = await Project.new(accounts[0], target);
+    const owner = accounts[0];
+    const duration = 12;
+    const contract = await Project.new(owner, target, duration);
     const contractOwner = await contract.owner();
-    assert.equal(contractOwner, accounts[0]);
+    assert.equal(contractOwner, owner);
     const contractTarget = await contract.target();
     assert.equal(contractTarget, target);
   });
@@ -29,7 +31,7 @@ contract('Project', function(accounts) {
 
  it("should be able to determine if its target has been reached", async function() {
    var funded = false;
-   const contract = await Project.new(accounts[0], 200);
+   const contract = await Project.new(accounts[0], 200, 12);
    _ = await contract.contribute(accounts[1], 100);
    funded = await contract.isFullyFunded();
    // Project is not yet fully funded.
