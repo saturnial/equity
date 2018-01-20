@@ -33,7 +33,7 @@ contract("Project", accounts => {
   });
 
   it("should be able to determine if its target has been reached", async () => {
-    var funded = false;
+    let funded = false;
     const contract = await Project.new(accounts[0], 200, 12);
     await contract.contribute(accounts[1], 100);
     funded = await contract.isFullyFunded();
