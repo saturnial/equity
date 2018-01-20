@@ -2,15 +2,16 @@ pragma solidity ^0.4.2;
 
 contract Project {
 
+  /* public properties */
   address public owner;
   uint public target;
-
   mapping (address => uint) public contributions;
   uint public totalAmountRaised;
 
+  /* events */
   event ContributionMade(address contributor, uint amount);
 
-  function Project(address _owner, uint _target) public {  
+  function Project(address _owner, uint _target) public {
     owner = _owner;
     target = _target;
   }
