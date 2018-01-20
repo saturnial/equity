@@ -5,26 +5,26 @@ contract Project {
   address public owner;
   uint public target;
 
-   mapping (address => uint) public contributions;
-   uint public totalAmountRaised;
+  mapping (address => uint) public contributions;
+  uint public totalAmountRaised;
 
-   function Project(address _owner, uint _target) public {
-     owner = _owner;
-     target = _target;
-   }
+  function Project(address _owner, uint _target) public {
+    owner = _owner;
+    target = _target;
+  }
 
-   function contribute(address _contributor, uint _amount) public returns (bool success) {
-     contributions[_contributor] += _amount;
-     totalAmountRaised += _amount;
-     return true;
-   }
+  function contribute(address _contributor, uint _amount) public returns (bool success) {
+    contributions[_contributor] += _amount;
+    totalAmountRaised += _amount;
+    return true;
+  }
 
-   function balanceOf(address _contributor) public view returns (uint balance) {
-        return contributions[_contributor];
-    }
+  function balanceOf(address _contributor) public view returns (uint balance) {
+    return contributions[_contributor];
+  }
 
-    function isFullyFunded() public view returns (bool) {
-      return totalAmountRaised >= target;
-    }
+  function isFullyFunded() public view returns (bool) {
+    return totalAmountRaised >= target;
+  }
 
 }
