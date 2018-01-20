@@ -11,6 +11,7 @@ contract Project {
 
   /* events */
   event ContributionMade(address contributor, uint amount);
+  event GoalReached(uint amount, address beneficiary);
 
   function Project(address _owner, uint _target) public {
     owner = _owner;
