@@ -8,7 +8,9 @@ contract Project {
   mapping (address => uint) public contributions;
   uint public totalAmountRaised;
 
-  function Project(address _owner, uint _target) public {
+  event ContributionMade(address contributor, uint amount);
+
+  function Project(address _owner, uint _target) public {  
     owner = _owner;
     target = _target;
   }
@@ -16,6 +18,7 @@ contract Project {
   function contribute(address _contributor, uint _amount) public returns (bool success) {
     contributions[_contributor] += _amount;
     totalAmountRaised += _amount;
+    ContributionMade(_contributor, _amount);
     return true;
   }
 
