@@ -18,6 +18,10 @@ contract Project {
     target = _target;
   }
 
+  /* This modifier ensures that the function it modifies is only run if the
+  deadline of the project has passed. */
+  modifier afterDeadline() { if (now >= deadline) _; }
+
   function contribute(address _contributor, uint _amount) public returns (bool success) {
     contributions[_contributor] += _amount;
     totalAmountRaised += _amount;
