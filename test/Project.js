@@ -1,8 +1,8 @@
 var Project = artifacts.require("Project");
 
-contract('Project', function(accounts) {
+contract('Project', (accounts) => {
 
-  it("is initialized with an owner and target", async function() {
+  it("is initialized with an owner and target", async () => {
     const target = 200;
     const owner = accounts[0];
     const duration = 12;
@@ -13,13 +13,13 @@ contract('Project', function(accounts) {
     assert.equal(contractTarget, target);
   });
 
-  it("starts with 0 funds raised", async function() {
+  it("starts with 0 funds raised", async () => {
     const contract = await Project.deployed();
     const total = await contract.totalAmountRaised();
     assert.equal(total, 0, "No funds should be tied to a new project.");
   });
 
- it("should be able to accept a contribution of 100", async function() {
+ it("should be able to accept a contribution of 100", async () => {
    const amount = 100;
    const contract = await Project.deployed();
    _ = await contract.contribute(accounts[0], amount);
@@ -29,7 +29,7 @@ contract('Project', function(accounts) {
    assert.equal(total, amount, "Total amount raised should be 100.");
  });
 
- it("should be able to determine if its target has been reached", async function() {
+ it("should be able to determine if its target has been reached", async () => {
    var funded = false;
    const contract = await Project.new(accounts[0], 200, 12);
    _ = await contract.contribute(accounts[1], 100);
