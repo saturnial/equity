@@ -4,8 +4,7 @@ contract("Project", accounts => {
   it("is initialized with an owner and target", async () => {
     const target = 200;
     const owner = accounts[0];
-    const duration = 12;
-    const contract = await Project.new(owner, target, duration);
+    const contract = await Project.new(owner, target);
     const contractOwner = await contract.owner();
     assert.equal(contractOwner, owner);
     const contractTarget = await contract.target();
@@ -34,7 +33,7 @@ contract("Project", accounts => {
 
   it("should be able to determine if its target has been reached", async () => {
     let funded = false;
-    const contract = await Project.new(accounts[0], 200, 12);
+    const contract = await Project.new(accounts[0], 200);
     await contract.contribute(accounts[1], 100);
     funded = await contract.isFullyFunded();
     // Project is not yet fully funded.
@@ -46,7 +45,7 @@ contract("Project", accounts => {
   });
 
   it("should return the total number of contributions", async () => {
-    const contract = await Project.new(accounts[0], 200, 12);
+    const contract = await Project.new(accounts[0], 200);
     await contract.contribute(accounts[1], 100);
     await contract.contribute(accounts[2], 200);
     await contract.contribute(accounts[3], 300);
