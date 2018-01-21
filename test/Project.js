@@ -53,4 +53,20 @@ contract("Project", accounts => {
     const numberOfContributions = await contract.numberOfContributions();
     assert.equal(numberOfContributions, 3, "There are 3 contributions.");
   });
+
+  it("should indicate whether a project is open or closed to contribution", async () => {});
+
+  it("should not allow an owner to withdraw funds if project is still open", async () => {});
+
+  it("should allow an owner to withdraw funds if project is closed and successful", async () => {});
+
+  it("should not allow an owner to withdraw funds if project is closed and unsuccessful", async () => {});
+
+  it("should allow a contributor to withdraw funds if project is closed and unsuccessful", async () => {});
+
+  it("should not allow a contributor to withdraw funds if project is closed and successful", async () => {});
+
+  xit("should not allow a contributor to withdraw funds if project is still open", async () => {});
+
+  it("should only allow contributors or owners to withdraw funds", async () => {});
 });
