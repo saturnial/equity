@@ -2,7 +2,7 @@ pragma solidity ^0.4.2;
 
 contract Project {
 
-  /* public properties */
+  /* Public properties */
   address public owner;
   uint public target;
   uint public deadline;
@@ -10,19 +10,21 @@ contract Project {
   address[] public contributors;
   mapping (address => uint) public contributions;
 
-  /* events */
+  /* Events */
   event ContributionMade(address contributor, uint amount);
   event GoalReached(uint amount, address beneficiary);
 
+  /* Constructor */
   function Project(address _owner, uint _target, uint _durationInHours) public {
     owner = _owner;
     target = _target;
     deadline = now + _durationInHours * 1 hours;
   }
 
-  /* This modifier ensures that the function it modifies is only run if the
-  deadline of the project has passed. */
+  /* Modifiers */
   modifier afterDeadline() { if (now >= deadline) _; }
+
+  /* Publicly-exposed interface */
 
   function contribute(address _contributor, uint _amount) public returns (bool success) {
     contributions[_contributor] += _amount;
