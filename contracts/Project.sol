@@ -27,7 +27,7 @@ contract Project {
 
   /* Publicly-exposed interface */
 
-  function contribute(address _contributor, uint _amount) public returns (bool success) {
+  function contribute(address _contributor, uint _amount) public projectOpen returns (bool success) {
     contributions[_contributor] += _amount;
     totalAmountRaised += _amount;
     contributors.push(_contributor);
