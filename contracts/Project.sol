@@ -12,6 +12,8 @@ contract Project {
 
   /* Internal properties */
   mapping (address => uint) internal balances;
+  bool hasOwnerWithdrawnFunds = false;
+
   /* Events */
   event ContributionMade(address contributor, uint amount);
   event GoalReached(uint amount, address beneficiary);
@@ -50,6 +52,30 @@ contract Project {
 
   function numberOfContributions() public view returns (uint number) {
     return contributors.length;
+  }
+
+  function withdraw() public afterDeadline {
+    if (isFullyFunded()) {
+      withdrawForOwner();
+    } else {
+      withdrawForContributor();
+    }
+  }
+
+  /* Internal functions */
+
+  function withdrawForContributor() internal {
+    if (balances[msg.sender] > 0) {
+      msg.sender.transfer(balances[msg.sender]);
+      balances[msg.sender] = 0;
+    }
+  }
+
+  function withdrawForOwner() internal {
+    if (!hasOwnerWithdrawnFunds) {
+      owner.transfer(totalAmountRaised);
+      hasOwnerWithdrawnFunds = true;
+    }
   }
 
 }
