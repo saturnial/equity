@@ -23,6 +23,7 @@ contract Project {
 
   /* Modifiers */
   modifier afterDeadline() { if (now >= deadline) _; }
+  modifier projectOpen() { if (deadline < now) _; }
 
   /* Publicly-exposed interface */
 
