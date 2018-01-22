@@ -28,6 +28,8 @@ contract Project {
   /* Publicly-exposed interface */
 
   function contribute(address _contributor, uint _amount) public projectOpen returns (bool success) {
+    require(_amount > 0);
+
     contributions[_contributor] += _amount;
     totalAmountRaised += _amount;
     contributors.push(_contributor);
