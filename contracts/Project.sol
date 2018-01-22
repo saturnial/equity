@@ -10,6 +10,8 @@ contract Project {
   address[] public contributors;
   mapping (address => uint) public contributions;
 
+  /* Internal properties */
+  mapping (address => uint) internal balances;
   /* Events */
   event ContributionMade(address contributor, uint amount);
   event GoalReached(uint amount, address beneficiary);
@@ -32,13 +34,14 @@ contract Project {
 
     contributions[_contributor] += _amount;
     totalAmountRaised += _amount;
+    balances[_contributor] += _amount;
     contributors.push(_contributor);
     ContributionMade(_contributor, _amount);
     return true;
   }
 
   function balanceOf(address _contributor) public view returns (uint balance) {
-    return contributions[_contributor];
+    return balances[_contributor];
   }
 
   function isFullyFunded() public view returns (bool funded) {
